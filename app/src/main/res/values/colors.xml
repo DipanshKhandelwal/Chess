@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorBoardDark">#f0ba8c29</color>
+    <color name="colorBoardLight">#f0f0d157</color>
+    <color name="colorDanger">#a2ce2a7c</color>
+    <color name="colorPositionAvailable">#795e45e6</color>
+    <color name="colorSelected">#969b1be1</color>
+    <color name="colorKingInDanger">#8dff0004</color>
+    <color name="backgroundBoard">#d9732b</color>
+    <color name="choose">#898989</color>
+
+</resources>
