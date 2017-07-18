@@ -1037,7 +1037,8 @@
             android:textAlignment="center"
             android:background="#ffffff"
             android:textColor="#e60f0f"
-            android:onClick="pawnChoice" />
+            android:onClick="pawnChoice"
+            android:elevation="6dp"/>
 
         <TextView
             android:text="Bishop"
@@ -1052,7 +1053,8 @@
             android:textAlignment="center"
             android:background="#ffffff"
             android:textColor="#4b84ba"
-            android:onClick="pawnChoice" />
+            android:onClick="pawnChoice"
+            android:elevation="6dp"/>
 
         <TextView
             android:text="Rook"
@@ -1067,7 +1069,8 @@
             android:textAlignment="center"
             android:background="#ffffff"
             android:textColor="#23bc32"
-            android:onClick="pawnChoice" />
+            android:onClick="pawnChoice"
+            android:elevation="6dp"/>
 
         <TextView
             android:text="Knight"
@@ -1082,7 +1085,8 @@
             android:textAlignment="center"
             android:background="#ffffff"
             android:textColor="#4b84ba"
-            android:onClick="pawnChoice" />
+            android:onClick="pawnChoice"
+            android:elevation="6dp"/>
 
     </LinearLayout>
 
