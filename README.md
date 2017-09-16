@@ -1,7 +1,10 @@
 # Chess
 ## A simple 2 player Chess Game for Android
 
-## How to launch the project
+## To launch the app
+* Download the app apk file from [here](https://github.com/DipanshKhandelwal/Chess/blob/master/apk/Chess.apk).
+
+## How to read the project
 1. Download **[Android Studio](https://developer.android.com/studio/index.html)** from the Google Developers site or using this [link](https://developer.android.com/studio/index.html).
 2. Install the file to your pc.
 3. Download the required **SDK(Standard Development Kit) Tools** .
