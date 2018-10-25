@@ -1,4 +1,17 @@
 # Chess
+
+ <div class="row">
+  <div class="column">
+    <img src="https://i.imgur.com/IAA37AX.jpg" height="285" width="135" hspace="5">
+  </div>
+  <div class="column">
+    <img src="https://i.imgur.com/WpTA1cH.jpg" height="285" width="135" hspace="5">
+  </div>
+  <div class="column">
+    <img src="https://i.imgur.com/T1VDf0a.jpg" height="285" width="135" hspace="5">
+  </div>
+</div> 
+
 ## A simple 2 player Chess Game for Android
 
 ## To launch the app
