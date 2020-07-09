@@ -1,6 +1,6 @@
-package com.chess.sergio;
+package com.chess.sergio.board;
 
-import com.chess.sergio.Pieces.Piece;
+import com.chess.sergio.pieces.Piece;
 
 /**
  * Created by DIPANSH KHANDELWAL on 03-06-2017

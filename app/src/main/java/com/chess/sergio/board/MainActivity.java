@@ -1,4 +1,4 @@
-package com.chess.sergio;
+package com.chess.sergio.board;
 
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
@@ -7,14 +7,15 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.chess.sergio.Pieces.Bishop;
-import com.chess.sergio.Pieces.King;
-import com.chess.sergio.Pieces.Knight;
-import com.chess.sergio.Pieces.Pawn;
-import com.chess.sergio.Pieces.Piece;
-import com.chess.sergio.Pieces.Queen;
-import com.chess.sergio.Pieces.Rook;
 import com.chess.sergio.R;
+import com.chess.sergio.pieces.Bishop;
+import com.chess.sergio.pieces.King;
+import com.chess.sergio.pieces.Knight;
+import com.chess.sergio.pieces.Pawn;
+import com.chess.sergio.pieces.Piece;
+import com.chess.sergio.pieces.Queen;
+import com.chess.sergio.pieces.Rook;
+import com.github.bhlangonijr.chesslib.Board;
 
 import java.util.ArrayList;
 
@@ -76,13 +77,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Boolean empty = getIntent().getExtras().getBoolean("empty");
         // Making notification bar transparent
         if (Build.VERSION.SDK_INT >= 21) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         }
         setContentView(R.layout.activity_main);
 
-        initializeBoard();
+        initializeBoard(!empty);
 
         game_over = (TextView)findViewById(R.id.game_over);
         pawn_choices = (LinearLayout)findViewById(R.id.pawn_chioces);
@@ -91,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         pawn_choices.setVisibility(View.INVISIBLE);
     }
 
-    private void initializeBoard() {
+    private void initializeBoard(boolean initalize) {
         bKing = new King(false);
         wKing = new King(true);
 
@@ -138,42 +141,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
 
-        Board[0][7].setPiece(wRook1);
-        Board[1][7].setPiece(wKnight1);
-        Board[2][7].setPiece(wBishop1);
-        Board[3][7].setPiece(wQueen);
-        Board[4][7].setPiece(wKing);
-        Board[5][7].setPiece(wBishop2);
-        Board[6][7].setPiece(wKnight2);
-        Board[7][7].setPiece(wRook2);
+        if (initalize) {
+            initialPosition();
+        }
 
-        Board[0][6].setPiece(wPawn1);
-        Board[1][6].setPiece(wPawn2);
-        Board[2][6].setPiece(wPawn3);
-        Board[3][6].setPiece(wPawn4);
-        Board[4][6].setPiece(wPawn5);
-        Board[5][6].setPiece(wPawn6);
-        Board[6][6].setPiece(wPawn7);
-        Board[7][6].setPiece(wPawn8);
+        setupBoard();
 
-        Board[0][0].setPiece(bRook1);
-        Board[1][0].setPiece(bKnight1);
-        Board[2][0].setPiece(bBishop1);
-        Board[3][0].setPiece(bQueen);
-        Board[4][0].setPiece(bKing);
-        Board[5][0].setPiece(bBishop2);
-        Board[6][0].setPiece(bKnight2);
-        Board[7][0].setPiece(bRook2);
+        for(int g=0;g<8;g++){
+            for(int h=0;h<8;h++){
+                if(Board[g][h].getPiece()==null){
+                    Board2[g][h].setPiece(null);
+                }else{
+                    Board2[g][h].setPiece(Board[g][h].getPiece());
+                }
+            }
+        }
 
-        Board[0][1].setPiece(bPawn1);
-        Board[1][1].setPiece(bPawn2);
-        Board[2][1].setPiece(bPawn3);
-        Board[3][1].setPiece(bPawn4);
-        Board[4][1].setPiece(bPawn5);
-        Board[5][1].setPiece(bPawn6);
-        Board[6][1].setPiece(bPawn7);
-        Board[7][1].setPiece(bPawn8);
+        numberOfMoves = 0;
+        AnythingSelected = false;
+        FirstPlayerTurn = true;
+        setBoard();
+    }
 
+    private void setupBoard() {
         DisplayBoard[0][0] = (TextView) findViewById(R.id.R00);
         DisplayBoardBackground[0][0] = (TextView) findViewById(R.id.R000);
         DisplayBoard[1][0] = (TextView) findViewById(R.id.R10);
@@ -309,21 +299,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         DisplayBoardBackground[6][7] = (TextView) findViewById(R.id.R067);
         DisplayBoard[7][7] = (TextView) findViewById(R.id.R77);
         DisplayBoardBackground[7][7] = (TextView) findViewById(R.id.R077);
+    }
 
-        for(int g=0;g<8;g++){
-            for(int h=0;h<8;h++){
-                if(Board[g][h].getPiece()==null){
-                    Board2[g][h].setPiece(null);
-                }else{
-                    Board2[g][h].setPiece(Board[g][h].getPiece());
-                }
-            }
-        }
+    private void initialPosition() {
+        Board[0][7].setPiece(wRook1);
+        Board[1][7].setPiece(wKnight1);
+        Board[2][7].setPiece(wBishop1);
+        Board[3][7].setPiece(wQueen);
+        Board[4][7].setPiece(wKing);
+        Board[5][7].setPiece(wBishop2);
+        Board[6][7].setPiece(wKnight2);
+        Board[7][7].setPiece(wRook2);
 
-        numberOfMoves = 0;
-        AnythingSelected = false;
-        FirstPlayerTurn = true;
-        setBoard();
+        Board[0][6].setPiece(wPawn1);
+        Board[1][6].setPiece(wPawn2);
+        Board[2][6].setPiece(wPawn3);
+        Board[3][6].setPiece(wPawn4);
+        Board[4][6].setPiece(wPawn5);
+        Board[5][6].setPiece(wPawn6);
+        Board[6][6].setPiece(wPawn7);
+        Board[7][6].setPiece(wPawn8);
+
+        Board[0][0].setPiece(bRook1);
+        Board[1][0].setPiece(bKnight1);
+        Board[2][0].setPiece(bBishop1);
+        Board[3][0].setPiece(bQueen);
+        Board[4][0].setPiece(bKing);
+        Board[5][0].setPiece(bBishop2);
+        Board[6][0].setPiece(bKnight2);
+        Board[7][0].setPiece(bRook2);
+
+        Board[0][1].setPiece(bPawn1);
+        Board[1][1].setPiece(bPawn2);
+        Board[2][1].setPiece(bPawn3);
+        Board[3][1].setPiece(bPawn4);
+        Board[4][1].setPiece(bPawn5);
+        Board[5][1].setPiece(bPawn6);
+        Board[6][1].setPiece(bPawn7);
+        Board[7][1].setPiece(bPawn8);
     }
 
     private void setBoard() {

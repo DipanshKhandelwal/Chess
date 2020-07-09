@@ -4,6 +4,7 @@ allprojects {
     repositories {
         jcenter()
         google()
+        maven { url 'https://jitpack.io' }
     }
 }
 
@@ -28,6 +29,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.github.bhlangonijr:chesslib:1.1.19'
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })

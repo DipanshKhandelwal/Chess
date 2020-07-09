@@ -1,8 +1,4 @@
-package com.chess.sergio;
-
-/**
- * Created by DIPANSH KHANDELWAL on 03-06-2017
- */
+package com.chess.sergio.board;
 
 public class Coordinates {
     private int x;

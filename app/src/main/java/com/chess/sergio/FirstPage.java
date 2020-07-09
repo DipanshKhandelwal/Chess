@@ -9,9 +9,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import com.chess.sergio.R;
+
+import com.chess.sergio.board.MainActivity;
 
 public class FirstPage extends AppCompatActivity {
+
+    public static final String INITIALIZE = "initialize";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +40,23 @@ public class FirstPage extends AppCompatActivity {
             }
         },5000);
 
-        Button StartGame = (Button) findViewById(R.id.button);
+        Button StartGame = (Button) findViewById(R.id.startNormal);
+        Button StartGameEmpty = (Button) findViewById(R.id.startEmpty);
 
         StartGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(FirstPage.this , MainActivity.class);
+                i.putExtra(INITIALIZE,false);
+                FirstPage.this.startActivity(i);
+            }
+        });
+
+        StartGameEmpty.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(FirstPage.this , MainActivity.class);
+                i.putExtra(INITIALIZE,false);
                 FirstPage.this.startActivity(i);
             }
         });

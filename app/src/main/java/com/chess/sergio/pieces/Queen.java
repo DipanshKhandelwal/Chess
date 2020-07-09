@@ -1,7 +1,7 @@
-package com.chess.sergio.Pieces;
+package com.chess.sergio.pieces;
 
-import com.chess.sergio.Coordinates;
-import com.chess.sergio.Position;
+import com.chess.sergio.board.Coordinates;
+import com.chess.sergio.board.Position;
 
 import java.util.ArrayList;
 
