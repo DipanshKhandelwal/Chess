@@ -19,6 +19,7 @@ public class FirstPage extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= 21) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         }
+
         setContentView(R.layout.activity_first_page);
 
         final ImageView FirstLayout = (ImageView) findViewById(R.id.FirstLayout);
