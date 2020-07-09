@@ -14,7 +14,7 @@ import com.chess.sergio.Pieces.Pawn;
 import com.chess.sergio.Pieces.Piece;
 import com.chess.sergio.Pieces.Queen;
 import com.chess.sergio.Pieces.Rook;
-import com.example.dipanshkhandelwal.chess.R;
+import com.chess.sergio.R;
 
 import java.util.ArrayList;
 
