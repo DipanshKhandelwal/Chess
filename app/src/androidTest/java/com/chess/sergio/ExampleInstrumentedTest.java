@@ -1,4 +1,4 @@
-package com.example.dipanshkhandelwal.chess;
+package com.chess.sergio;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

@@ -1,7 +1,7 @@
-package com.example.dipanshkhandelwal.chess.Pieces;
+package com.chess.sergio.Pieces;
 
-import com.example.dipanshkhandelwal.chess.Coordinates;
-import com.example.dipanshkhandelwal.chess.Position;
+import com.chess.sergio.Coordinates;
+import com.chess.sergio.Position;
 
 import java.util.ArrayList;
 

@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Chess.iml" filepath="$PROJECT_DIR$/Chess.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chess.iml" filepath="$PROJECT_DIR$/chess.iml" group="chess" />
+      <module fileurl="file://$PROJECT_DIR$/app/chess-app.iml" filepath="$PROJECT_DIR$/app/chess-app.iml" group="chess/app" />
+      <module fileurl="file://$PROJECT_DIR$/wks_android-chess.iml" filepath="$PROJECT_DIR$/wks_android-chess.iml" group="chess" />
     </modules>
   </component>
 </project>

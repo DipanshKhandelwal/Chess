@@ -1,4 +1,4 @@
-package com.example.dipanshkhandelwal.chess;
+package com.chess.sergio;
 
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
@@ -7,13 +7,14 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.dipanshkhandelwal.chess.Pieces.Bishop;
-import com.example.dipanshkhandelwal.chess.Pieces.King;
-import com.example.dipanshkhandelwal.chess.Pieces.Knight;
-import com.example.dipanshkhandelwal.chess.Pieces.Pawn;
-import com.example.dipanshkhandelwal.chess.Pieces.Piece;
-import com.example.dipanshkhandelwal.chess.Pieces.Queen;
-import com.example.dipanshkhandelwal.chess.Pieces.Rook;
+import com.chess.sergio.Pieces.Bishop;
+import com.chess.sergio.Pieces.King;
+import com.chess.sergio.Pieces.Knight;
+import com.chess.sergio.Pieces.Pawn;
+import com.chess.sergio.Pieces.Piece;
+import com.chess.sergio.Pieces.Queen;
+import com.chess.sergio.Pieces.Rook;
+import com.example.dipanshkhandelwal.chess.R;
 
 import java.util.ArrayList;
 

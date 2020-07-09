@@ -1,6 +1,6 @@
-package com.example.dipanshkhandelwal.chess;
+package com.chess.sergio;
 
-import com.example.dipanshkhandelwal.chess.Pieces.Piece;
+import com.chess.sergio.Pieces.Piece;
 
 /**
  * Created by DIPANSH KHANDELWAL on 03-06-2017

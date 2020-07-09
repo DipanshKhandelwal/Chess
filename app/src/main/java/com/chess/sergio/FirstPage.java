@@ -1,4 +1,4 @@
-package com.example.dipanshkhandelwal.chess;
+package com.chess.sergio;
 
 import android.content.Intent;
 import android.os.Build;
