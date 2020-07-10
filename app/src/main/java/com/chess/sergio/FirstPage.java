@@ -41,17 +41,8 @@ public class FirstPage extends AppCompatActivity {
         },5000);
 
         Button StartGame = (Button) findViewById(R.id.startNormal);
-        Button StartGameEmpty = (Button) findViewById(R.id.startEmpty);
 
         StartGame.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(FirstPage.this , MainActivity.class);
-                FirstPage.this.startActivity(i);
-            }
-        });
-
-        StartGameEmpty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(FirstPage.this , MainActivity.class);

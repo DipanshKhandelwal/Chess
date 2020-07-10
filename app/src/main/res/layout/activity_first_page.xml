@@ -41,15 +41,6 @@
             android:layout_margin="10dp"
             android:background="@android:color/darker_gray" />
 
-        <Button
-            android:text="Fresh Start"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#ffffff"
-            android:id="@+id/startEmpty"
-            android:layout_margin="10dp"
-            android:background="@android:color/darker_gray" />
-
         <ImageView
             android:id="@+id/FirstLayout"
             android:layout_width="0dp"

@@ -12,8 +12,8 @@ import com.chess.sergio.R;
 import com.github.bhlangonijr.chesslib.Board;
 import com.github.bhlangonijr.chesslib.File;
 import com.github.bhlangonijr.chesslib.Piece;
+import com.github.bhlangonijr.chesslib.PieceType;
 import com.github.bhlangonijr.chesslib.Rank;
-import com.github.bhlangonijr.chesslib.Side;
 import com.github.bhlangonijr.chesslib.Square;
 import com.github.bhlangonijr.chesslib.move.Move;
 
@@ -30,8 +30,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public TextView[][] DisplayBoard = new TextView[8][8];
     public TextView[][] DisplayBoardBackground = new TextView[8][8];
-
-    public LinearLayout pawn_choices;
 
 
     Board board;
@@ -51,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         setupBoard();
     }
+
     private void setupBoard() {
         DisplayBoard[0][0] = (TextView) findViewById(R.id.R00);
         DisplayBoardBackground[0][0] = (TextView) findViewById(R.id.R000);
@@ -191,59 +190,63 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         refreshBoard();
     }
 
-        private void refreshBoard() {
+    private void refreshBoard() {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
 
                 Square square = getSquare(i, j);
                 Piece piece = board.getPiece(square);
 
-                switch (piece) {
-                    case WHITE_KING:
-                        DisplayBoard[i][j].setBackgroundResource(R.drawable.wking);
-                        break;
-                    case BLACK_KING:
-                        DisplayBoard[i][j].setBackgroundResource(R.drawable.bking);
-                        break;
-
-                    case WHITE_QUEEN:
-                        DisplayBoard[i][j].setBackgroundResource(R.drawable.wqueen);
-                        break;
-                    case BLACK_QUEEN:
-                        DisplayBoard[i][j].setBackgroundResource(R.drawable.bqueen);
-                        break;
-                    case WHITE_ROOK:
-                        DisplayBoard[i][j].setBackgroundResource(R.drawable.wrook);
-                        break;
-                    case BLACK_ROOK:
-                        DisplayBoard[i][j].setBackgroundResource(R.drawable.brook);
-                        break;
-                    case WHITE_BISHOP:
-                        DisplayBoard[i][j].setBackgroundResource(R.drawable.wbishop);
-                        break;
-                    case BLACK_BISHOP:
-                        DisplayBoard[i][j].setBackgroundResource(R.drawable.bbishop);
-                        break;
-                    case WHITE_KNIGHT:
-                        DisplayBoard[i][j].setBackgroundResource(R.drawable.wknight);
-                        break;
-                    case BLACK_KNIGHT:
-                        DisplayBoard[i][j].setBackgroundResource(R.drawable.bknight);
-                        break;
-                    case WHITE_PAWN:
-                        DisplayBoard[i][j].setBackgroundResource(R.drawable.wpawn);
-                        break;
-                    case BLACK_PAWN:
-                        DisplayBoard[i][j].setBackgroundResource(R.drawable.bpawn);
-                        break;
-
-                    default:
-
-                }
+                putPiece(i, j, piece);
+            }
         }
+
     }
 
-}
+    private void putPiece(int i, int j, Piece piece) {
+        switch (piece) {
+            case WHITE_KING:
+                DisplayBoard[i][j].setBackgroundResource(R.drawable.wking);
+                break;
+            case BLACK_KING:
+                DisplayBoard[i][j].setBackgroundResource(R.drawable.bking);
+                break;
+
+            case WHITE_QUEEN:
+                DisplayBoard[i][j].setBackgroundResource(R.drawable.wqueen);
+                break;
+            case BLACK_QUEEN:
+                DisplayBoard[i][j].setBackgroundResource(R.drawable.bqueen);
+                break;
+            case WHITE_ROOK:
+                DisplayBoard[i][j].setBackgroundResource(R.drawable.wrook);
+                break;
+            case BLACK_ROOK:
+                DisplayBoard[i][j].setBackgroundResource(R.drawable.brook);
+                break;
+            case WHITE_BISHOP:
+                DisplayBoard[i][j].setBackgroundResource(R.drawable.wbishop);
+                break;
+            case BLACK_BISHOP:
+                DisplayBoard[i][j].setBackgroundResource(R.drawable.bbishop);
+                break;
+            case WHITE_KNIGHT:
+                DisplayBoard[i][j].setBackgroundResource(R.drawable.wknight);
+                break;
+            case BLACK_KNIGHT:
+                DisplayBoard[i][j].setBackgroundResource(R.drawable.bknight);
+                break;
+            case WHITE_PAWN:
+                DisplayBoard[i][j].setBackgroundResource(R.drawable.wpawn);
+                break;
+            case BLACK_PAWN:
+                DisplayBoard[i][j].setBackgroundResource(R.drawable.bpawn);
+                break;
+
+            default:
+
+        }
+    }
 
     private Square getSquare(int f, int r) {
         Rank[] ranks = {Rank.RANK_1, Rank.RANK_2, Rank.RANK_3, Rank.RANK_4, Rank.RANK_5, Rank.RANK_6, Rank.RANK_7, Rank.RANK_8};
@@ -265,207 +268,215 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 clickedPosition = getSquare(1, 0);
                 break;
             case R.id.R20:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(2, 0);
                 break;
             case R.id.R30:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(3, 0);
                 break;
             case R.id.R40:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(4, 0);
                 break;
             case R.id.R50:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(5, 0);
                 break;
             case R.id.R60:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(6, 0);
                 break;
             case R.id.R70:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(7, 0);
                 break;
 
             case R.id.R01:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(0, 1);
                 break;
             case R.id.R11:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(1, 1);
                 break;
             case R.id.R21:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(2, 1);
                 break;
             case R.id.R31:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(3, 1);
                 break;
             case R.id.R41:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(4, 1);
                 break;
             case R.id.R51:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(5, 1);
                 break;
             case R.id.R61:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(6, 1);
                 break;
             case R.id.R71:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(7, 1);
                 break;
 
             case R.id.R02:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(0, 2);
                 break;
             case R.id.R12:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(1, 2);
                 break;
             case R.id.R22:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(2, 2);
                 break;
             case R.id.R32:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(3, 2);
                 break;
             case R.id.R42:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(4, 2);
                 break;
             case R.id.R52:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(5, 2);
                 break;
             case R.id.R62:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(6, 2);
                 break;
             case R.id.R72:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(7, 2);
                 break;
 
             case R.id.R03:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(0, 3);
                 break;
             case R.id.R13:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(1, 3);
                 break;
             case R.id.R23:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(2, 3);
                 break;
             case R.id.R33:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(3, 3);
                 break;
             case R.id.R43:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(4, 3);
                 break;
             case R.id.R53:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(5, 3);
                 break;
             case R.id.R63:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(6, 3);
                 break;
             case R.id.R73:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(7, 3);
                 break;
 
             case R.id.R04:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(0, 4);
                 break;
             case R.id.R14:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(1, 4);
                 break;
             case R.id.R24:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(2, 4);
                 break;
             case R.id.R34:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(3, 4);
                 break;
             case R.id.R44:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(4, 4);
                 break;
             case R.id.R54:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(5, 4);
                 break;
             case R.id.R64:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(6, 4);
                 break;
             case R.id.R74:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(7, 4);
                 break;
 
             case R.id.R05:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(0, 5);
                 break;
             case R.id.R15:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(1, 5);
                 break;
             case R.id.R25:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(2, 5);
                 break;
             case R.id.R35:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(3, 5);
                 break;
             case R.id.R45:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(4, 5);
                 break;
             case R.id.R55:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(5, 5);
                 break;
             case R.id.R65:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(6, 5);
                 break;
             case R.id.R75:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(7, 5);
                 break;
 
             case R.id.R06:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(0, 6);
                 break;
             case R.id.R16:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(1, 6);
                 break;
             case R.id.R26:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(2, 6);
                 break;
             case R.id.R36:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(3, 6);
                 break;
             case R.id.R46:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(4, 6);
                 break;
             case R.id.R56:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(5, 6);
                 break;
             case R.id.R66:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(6, 6);
                 break;
             case R.id.R76:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(7, 6);
                 break;
 
             case R.id.R07:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(0, 7);
                 break;
             case R.id.R17:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(1, 7);
                 break;
             case R.id.R27:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(2, 7);
                 break;
             case R.id.R37:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(3, 7);
                 break;
             case R.id.R47:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(4, 7);
                 break;
             case R.id.R57:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(5, 7);
                 break;
             case R.id.R67:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(6, 7);
                 break;
             case R.id.R77:
-                clickedPosition = getSquare(1, 0);
+                clickedPosition = getSquare(7, 7);
                 break;
         }
 
+        if (oldPosition != null) {
+            resetColorAtLastPosition(oldPosition);
+        }
+        setColorAtSelectedSquare(clickedPosition);
+
         if (AnythingSelected) {
-            Move move = new Move(oldPosition,clickedPosition);
-            if (board.isMoveLegal(move,true)){
+            Move move = new Move(oldPosition, clickedPosition);
+            if (board.isMoveLegal(move, true)) {
+                new AlertDialog.Builder(MainActivity.this).setTitle("Error").setMessage("Movimiento legal").create().show();
+                putPiece(oldPosition.getRank().ordinal(), oldPosition.getFile().ordinal(), Piece.NONE);
+                putPiece(clickedPosition.getRank().ordinal(), clickedPosition.getFile().ordinal(), board.getPiece(oldPosition));
                 board.doMove(move);
-                refreshBoard();
-            }else{
-                new AlertDialog.Builder(MainActivity.this).setTitle( "Error" ).setMessage("Movimiento Ilegal").create().show();
+
+            } else {
+                new AlertDialog.Builder(MainActivity.this).setTitle("Error").setMessage("Movimiento Ilegal").create().show();
             }
 
         }
@@ -473,26 +484,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void undo(View v) {
 
-        if (board.getMoveCounter()>0){
+        if (board.getMoveCounter() > 0) {
             board.undoMove();
             refreshBoard();
-        }else{
-            new AlertDialog.Builder(MainActivity.this).setTitle( "Error" ).setMessage("No hay movimientos anteriores").create().show();
+        } else {
+            new AlertDialog.Builder(MainActivity.this).setTitle("Error").setMessage("No hay movimientos anteriores").create().show();
         }
 
     }
 
-    public void piece(View v){
+    public void piece(View v) {
         int x = v.getId();
-        switch (x){
-            case R.id.white_queen :
-                if(clickedPosition!=null){
-                    board.setPiece(Piece.WHITE_KING,clickedPosition);
-                }else{
-                    new AlertDialog.Builder(MainActivity.this).setTitle( "Error" ).setMessage("No has elegido posición").create().show();
+        switch (x) {
+            case R.id.white_queen:
+                if (clickedPosition != null) {
+                    board.setPiece(Piece.WHITE_KING, clickedPosition);
+                } else {
+                    new AlertDialog.Builder(MainActivity.this).setTitle("Error").setMessage("No has elegido posición").create().show();
                 }
                 break;
 
+        }
+    }
+
+    void setColorAtSelectedSquare(Square square) {
+        if (board.getPiece(square).getPieceType().equals(PieceType.NONE)) {
+            DisplayBoardBackground[square.getFile().ordinal()][square.getRank().ordinal()].setBackgroundResource(R.color.colorPositionAvailable);
+        } else {
+            DisplayBoardBackground[square.getFile().ordinal()][square.getRank().ordinal()].setBackgroundResource(R.color.colorDanger);
+        }
+    }
+
+    private void resetColorAtLastPosition(Square square) {
+        if ((square.getFile().ordinal() + square.getRank().ordinal()) % 2 == 0) {
+            DisplayBoardBackground[square.getFile().ordinal()][square.getRank().ordinal()].setBackgroundResource(R.color.colorBoardDark);
+        } else {
+            DisplayBoardBackground[square.getFile().ordinal()][square.getRank().ordinal()].setBackgroundResource(R.color.colorBoardLight);
         }
     }
 
