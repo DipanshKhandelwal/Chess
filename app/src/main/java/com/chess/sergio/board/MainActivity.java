@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public Boolean FirstPlayerTurn;
+
     public Boolean AnythingSelected = false;
 
     private Square oldPosition;
@@ -46,8 +46,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         }
         setContentView(R.layout.activity_main);
-
-        pawn_choices = (LinearLayout) findViewById(R.id.pawn_chioces);
 
         AnythingSelected = false;
 
@@ -190,10 +188,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         DisplayBoard[7][7] = (TextView) findViewById(R.id.R77);
         DisplayBoardBackground[7][7] = (TextView) findViewById(R.id.R077);
 
-        initializeBoard();
+        refreshBoard();
     }
 
-        private void initializeBoard() {
+        private void refreshBoard() {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
 
@@ -248,11 +246,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 }
 
     private Square getSquare(int f, int r) {
-        Rank[] ranks = {Rank.RANK_1, Rank.RANK_2, Rank.RANK_3, Rank.RANK_4, Rank.RANK_4, Rank.RANK_5, Rank.RANK_6, Rank.RANK_7, Rank.RANK_8};
+        Rank[] ranks = {Rank.RANK_1, Rank.RANK_2, Rank.RANK_3, Rank.RANK_4, Rank.RANK_5, Rank.RANK_6, Rank.RANK_7, Rank.RANK_8};
         File[] files = {File.FILE_A, File.FILE_B, File.FILE_C, File.FILE_D, File.FILE_E, File.FILE_F, File.FILE_G, File.FILE_H};
         Rank rank = ranks[r];
         File file = files[f];
         return Square.encode(rank, file);
+    }
+
+    public void addPiece(View v){
+
     }
 
     @Override
@@ -464,7 +466,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (AnythingSelected) {
             Move move = new Move(oldPosition,clickedPosition);
             if (board.isMoveLegal(move,true)){
-
+                board.doMove(move);
+                refreshBoard();
             }else{
                 new AlertDialog.Builder(MainActivity.this).setTitle( "Error" ).setMessage("Movimiento Ilegal").create().show();
             }
@@ -476,7 +479,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if (board.getMoveCounter()>0){
             board.undoMove();
-            initializeBoard();
+            refreshBoard();
         }else{
             new AlertDialog.Builder(MainActivity.this).setTitle( "Error" ).setMessage("No hay movimientos anteriores").create().show();
         }
