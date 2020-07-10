@@ -253,10 +253,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return Square.encode(rank, file);
     }
 
-    public void addPiece(View v){
-
-    }
-
     @Override
     public void onClick(View v) {
 
@@ -485,4 +481,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
+
+    public void piece(View v){
+        int x = v.getId();
+        switch (x){
+            case R.id.white_queen :
+                if(clickedPosition!=null){
+                    board.setPiece(Piece.WHITE_KING,clickedPosition);
+                }else{
+                    new AlertDialog.Builder(MainActivity.this).setTitle( "Error" ).setMessage("No has elegido posición").create().show();
+                }
+                break;
+
+        }
+    }
+
 }
