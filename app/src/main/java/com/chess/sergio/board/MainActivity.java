@@ -1,5 +1,6 @@
 package com.chess.sergio.board;
 
+import android.app.AlertDialog;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,7 +13,9 @@ import com.github.bhlangonijr.chesslib.Board;
 import com.github.bhlangonijr.chesslib.File;
 import com.github.bhlangonijr.chesslib.Piece;
 import com.github.bhlangonijr.chesslib.Rank;
+import com.github.bhlangonijr.chesslib.Side;
 import com.github.bhlangonijr.chesslib.Square;
+import com.github.bhlangonijr.chesslib.move.Move;
 
 
 import java.util.ArrayList;
@@ -22,15 +25,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public Boolean FirstPlayerTurn;
     public Boolean AnythingSelected = false;
 
+    private Square oldPosition;
     private Square clickedPosition;
 
-    public TextView game_over;
     public TextView[][] DisplayBoard = new TextView[8][8];
     public TextView[][] DisplayBoardBackground = new TextView[8][8];
 
     public LinearLayout pawn_choices;
-    public int numberOfMoves;
-
 
 
     Board board;
@@ -40,26 +41,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
 
         board = new Board();
-
-        Boolean empty = getIntent().getExtras().getBoolean("empty");
         // Making notification bar transparent
         if (Build.VERSION.SDK_INT >= 21) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         }
         setContentView(R.layout.activity_main);
 
-        game_over = (TextView)findViewById(R.id.game_over);
-        pawn_choices = (LinearLayout)findViewById(R.id.pawn_chioces);
+        pawn_choices = (LinearLayout) findViewById(R.id.pawn_chioces);
 
-        game_over.setVisibility(View.INVISIBLE);
-        pawn_choices.setVisibility(View.INVISIBLE);
-
-        numberOfMoves = 0;
         AnythingSelected = false;
-        FirstPlayerTurn = true;
-        setBoard();
-    }
 
+        setupBoard();
+    }
     private void setupBoard() {
         DisplayBoard[0][0] = (TextView) findViewById(R.id.R00);
         DisplayBoardBackground[0][0] = (TextView) findViewById(R.id.R000);
@@ -196,98 +189,76 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         DisplayBoardBackground[6][7] = (TextView) findViewById(R.id.R067);
         DisplayBoard[7][7] = (TextView) findViewById(R.id.R77);
         DisplayBoardBackground[7][7] = (TextView) findViewById(R.id.R077);
+
+        initializeBoard();
     }
 
-
-
-    private void setBoard() {
-
-
+        private void initializeBoard() {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
 
                 Square square = getSquare(i, j);
                 Piece piece = board.getPiece(square);
 
-                int x;
+                switch (piece) {
+                    case WHITE_KING:
+                        DisplayBoard[i][j].setBackgroundResource(R.drawable.wking);
+                        break;
+                    case BLACK_KING:
+                        DisplayBoard[i][j].setBackgroundResource(R.drawable.bking);
+                        break;
 
-                if (piece != null) {
-                    if (piece.value().equals("king")) x = 0;
-                    else if (piece.value().equals("queen")) x = 1;
-                    else if (piece.value().equals("rook")) x = 2;
-                    else if (piece.value().equals("bishop")) x = 3;
-                    else if (piece.value().equals("knight")) x = 4;
-                    else if (piece.value().equals("pawn")) x = 5;
-                    else x = 6;
+                    case WHITE_QUEEN:
+                        DisplayBoard[i][j].setBackgroundResource(R.drawable.wqueen);
+                        break;
+                    case BLACK_QUEEN:
+                        DisplayBoard[i][j].setBackgroundResource(R.drawable.bqueen);
+                        break;
+                    case WHITE_ROOK:
+                        DisplayBoard[i][j].setBackgroundResource(R.drawable.wrook);
+                        break;
+                    case BLACK_ROOK:
+                        DisplayBoard[i][j].setBackgroundResource(R.drawable.brook);
+                        break;
+                    case WHITE_BISHOP:
+                        DisplayBoard[i][j].setBackgroundResource(R.drawable.wbishop);
+                        break;
+                    case BLACK_BISHOP:
+                        DisplayBoard[i][j].setBackgroundResource(R.drawable.bbishop);
+                        break;
+                    case WHITE_KNIGHT:
+                        DisplayBoard[i][j].setBackgroundResource(R.drawable.wknight);
+                        break;
+                    case BLACK_KNIGHT:
+                        DisplayBoard[i][j].setBackgroundResource(R.drawable.bknight);
+                        break;
+                    case WHITE_PAWN:
+                        DisplayBoard[i][j].setBackgroundResource(R.drawable.wpawn);
+                        break;
+                    case BLACK_PAWN:
+                        DisplayBoard[i][j].setBackgroundResource(R.drawable.bpawn);
+                        break;
 
-                    switch (x) {
-                        case 0:
-                            if (piece.getPieceSide().value().equals("white")) {
-                                DisplayBoard[i][j].setBackgroundResource(R.drawable.wking);
-                            } else {
-                                DisplayBoard[i][j].setBackgroundResource(R.drawable.bking);
-                            }
-                            break;
+                    default:
 
-                        case 1:
-                            if (piece.getPieceSide().value().equals("white")) {
-                                DisplayBoard[i][j].setBackgroundResource(R.drawable.wqueen);
-                            } else {
-                                DisplayBoard[i][j].setBackgroundResource(R.drawable.bqueen);
-                            }
-                            break;
-
-                        case 2:
-                            if (piece.getPieceSide().value().equals("white")) {
-                                DisplayBoard[i][j].setBackgroundResource(R.drawable.wrook);
-                            } else {
-                                DisplayBoard[i][j].setBackgroundResource(R.drawable.brook);
-                            }
-                            break;
-
-                        case 3:
-                            if (piece.getPieceSide().value().equals("white")) {
-                                DisplayBoard[i][j].setBackgroundResource(R.drawable.wbishop);
-                            } else {
-                                DisplayBoard[i][j].setBackgroundResource(R.drawable.bbishop);
-                            }
-                            break;
-
-                        case 4:
-                            if (piece.getPieceSide().value().equals("white")) {
-                                DisplayBoard[i][j].setBackgroundResource(R.drawable.wknight);
-                            } else {
-                                DisplayBoard[i][j].setBackgroundResource(R.drawable.bknight);
-                            }
-                            break;
-
-                        case 5:
-                            if (piece.getPieceSide().value().equals("white")) {
-                                DisplayBoard[i][j].setBackgroundResource(R.drawable.wpawn);
-                            } else {
-                                DisplayBoard[i][j].setBackgroundResource(R.drawable.bpawn);
-                            }
-                            break;
-
-                        default:
-
-                    }
-                }else{
-                    DisplayBoard[i][j].setBackgroundResource(0);
                 }
-            }
         }
     }
 
-    private Square getSquare(int x, int y) {
-        Rank rank = Rank.fromValue(String.valueOf(x));
-        File file = File.fromValue(String.valueOf(y));
-        return Square.encode(rank,file);
+}
+
+    private Square getSquare(int f, int r) {
+        Rank[] ranks = {Rank.RANK_1, Rank.RANK_2, Rank.RANK_3, Rank.RANK_4, Rank.RANK_4, Rank.RANK_5, Rank.RANK_6, Rank.RANK_7, Rank.RANK_8};
+        File[] files = {File.FILE_A, File.FILE_B, File.FILE_C, File.FILE_D, File.FILE_E, File.FILE_F, File.FILE_G, File.FILE_H};
+        Rank rank = ranks[r];
+        File file = files[f];
+        return Square.encode(rank, file);
     }
 
     @Override
     public void onClick(View v) {
 
+        oldPosition = clickedPosition;
         switch (v.getId()) {
             case R.id.R00:
                 clickedPosition = getSquare(0, 0);
@@ -490,51 +461,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
 
-        if (!AnythingSelected) {
-            if(board.getPiece(clickedPosition).value() == null) {
-                return;
+        if (AnythingSelected) {
+            Move move = new Move(oldPosition,clickedPosition);
+            if (board.isMoveLegal(move,true)){
+
             }else{
-
+                new AlertDialog.Builder(MainActivity.this).setTitle( "Error" ).setMessage("Movimiento Ilegal").create().show();
             }
+
         }
     }
 
-    public void saveBoard(){
-        numberOfMoves++;
-        // TODO Guardar en firebase o en base de datos.
-    }
+    public void undo(View v) {
 
-    public void undo(View v){
-        board.undoMove();
-        setBoard();
-    }
-
-    private void resetColorAtAllowedPosition(ArrayList<Square> list) {
-        for(Square square:list){
-            if(board.getPiece(square) == null){
-                DisplayBoardBackground[Integer.parseInt(square.getFile().getNotation())][Integer.parseInt(square.getRank().getNotation())].setBackgroundResource(R.color.colorBoardDark);
-            }else {
-                DisplayBoardBackground[Integer.parseInt(square.getFile().getNotation())][Integer.parseInt(square.getRank().getNotation())].setBackgroundResource(R.color.colorBoardLight);
-            }
-        }
-    }
-
-    void setColorAtAllowedPosition(ArrayList<Square> list){
-
-        for(Square square:list){
-            if(board.getPiece(square) == null){
-                DisplayBoardBackground[Integer.parseInt(square.getFile().getNotation())][Integer.parseInt(square.getRank().getNotation())].setBackgroundResource(R.color.colorPositionAvailable);
-            }else{
-                DisplayBoardBackground[Integer.parseInt(square.getFile().getNotation())][Integer.parseInt(square.getRank().getNotation())].setBackgroundResource(R.color.colorPositionAvailable);
-            }
-        }
-    }
-
-    private void resetColorAtLastPosition(Square square){
-        if(board.getPiece(square) == null){
-            DisplayBoardBackground[Integer.parseInt(square.getFile().getNotation())][Integer.parseInt(square.getRank().getNotation())].setBackgroundResource(R.color.colorPositionAvailable);
+        if (board.getMoveCounter()>0){
+            board.undoMove();
+            initializeBoard();
         }else{
-            DisplayBoardBackground[Integer.parseInt(square.getFile().getNotation())][Integer.parseInt(square.getRank().getNotation())].setBackgroundResource(R.color.colorPositionAvailable);
+            new AlertDialog.Builder(MainActivity.this).setTitle( "Error" ).setMessage("No hay movimientos anteriores").create().show();
         }
+
     }
 }

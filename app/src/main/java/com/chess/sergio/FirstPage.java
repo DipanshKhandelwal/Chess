@@ -11,10 +11,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.chess.sergio.board.MainActivity;
+import com.chess.sergio.constants.Constants;
 
 public class FirstPage extends AppCompatActivity {
 
-    public static final String INITIALIZE = "initialize";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,6 @@ public class FirstPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(FirstPage.this , MainActivity.class);
-                i.putExtra(INITIALIZE,false);
                 FirstPage.this.startActivity(i);
             }
         });
@@ -56,7 +55,6 @@ public class FirstPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(FirstPage.this , MainActivity.class);
-                i.putExtra(INITIALIZE,false);
                 FirstPage.this.startActivity(i);
             }
         });
