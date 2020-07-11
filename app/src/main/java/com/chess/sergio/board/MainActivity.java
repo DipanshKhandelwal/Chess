@@ -15,9 +15,6 @@ import com.github.bhlangonijr.chesslib.Rank;
 import com.github.bhlangonijr.chesslib.Square;
 import com.github.bhlangonijr.chesslib.move.Move;
 
-
-import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
 
@@ -26,8 +23,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Square oldPosition;
     private Square clickedPosition;
 
-    public TextView[][] DisplayBoard = new TextView[8][8];
-    public TextView[][] DisplayBoardBackground = new TextView[8][8];
+    public TextView[][] displayBoard = new TextView[8][8];
+    public TextView[][] displayBoardBackground = new TextView[8][8];
 
 
     Board board;
@@ -49,141 +46,141 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setupBoard() {
-        DisplayBoard[0][0] = (TextView) findViewById(R.id.R00);
-        DisplayBoardBackground[0][0] = (TextView) findViewById(R.id.R000);
-        DisplayBoard[1][0] = (TextView) findViewById(R.id.R10);
-        DisplayBoardBackground[1][0] = (TextView) findViewById(R.id.R010);
-        DisplayBoard[2][0] = (TextView) findViewById(R.id.R20);
-        DisplayBoardBackground[2][0] = (TextView) findViewById(R.id.R020);
-        DisplayBoard[3][0] = (TextView) findViewById(R.id.R30);
-        DisplayBoardBackground[3][0] = (TextView) findViewById(R.id.R030);
-        DisplayBoard[4][0] = (TextView) findViewById(R.id.R40);
-        DisplayBoardBackground[4][0] = (TextView) findViewById(R.id.R040);
-        DisplayBoard[5][0] = (TextView) findViewById(R.id.R50);
-        DisplayBoardBackground[5][0] = (TextView) findViewById(R.id.R050);
-        DisplayBoard[6][0] = (TextView) findViewById(R.id.R60);
-        DisplayBoardBackground[6][0] = (TextView) findViewById(R.id.R060);
-        DisplayBoard[7][0] = (TextView) findViewById(R.id.R70);
-        DisplayBoardBackground[7][0] = (TextView) findViewById(R.id.R070);
+        displayBoard[0][0] = (TextView) findViewById(R.id.R00);
+        displayBoardBackground[0][0] = (TextView) findViewById(R.id.R000);
+        displayBoard[1][0] = (TextView) findViewById(R.id.R10);
+        displayBoardBackground[1][0] = (TextView) findViewById(R.id.R010);
+        displayBoard[2][0] = (TextView) findViewById(R.id.R20);
+        displayBoardBackground[2][0] = (TextView) findViewById(R.id.R020);
+        displayBoard[3][0] = (TextView) findViewById(R.id.R30);
+        displayBoardBackground[3][0] = (TextView) findViewById(R.id.R030);
+        displayBoard[4][0] = (TextView) findViewById(R.id.R40);
+        displayBoardBackground[4][0] = (TextView) findViewById(R.id.R040);
+        displayBoard[5][0] = (TextView) findViewById(R.id.R50);
+        displayBoardBackground[5][0] = (TextView) findViewById(R.id.R050);
+        displayBoard[6][0] = (TextView) findViewById(R.id.R60);
+        displayBoardBackground[6][0] = (TextView) findViewById(R.id.R060);
+        displayBoard[7][0] = (TextView) findViewById(R.id.R70);
+        displayBoardBackground[7][0] = (TextView) findViewById(R.id.R070);
 
-        DisplayBoard[0][1] = (TextView) findViewById(R.id.R01);
-        DisplayBoardBackground[0][1] = (TextView) findViewById(R.id.R001);
-        DisplayBoard[1][1] = (TextView) findViewById(R.id.R11);
-        DisplayBoardBackground[1][1] = (TextView) findViewById(R.id.R011);
-        DisplayBoard[2][1] = (TextView) findViewById(R.id.R21);
-        DisplayBoardBackground[2][1] = (TextView) findViewById(R.id.R021);
-        DisplayBoard[3][1] = (TextView) findViewById(R.id.R31);
-        DisplayBoardBackground[3][1] = (TextView) findViewById(R.id.R031);
-        DisplayBoard[4][1] = (TextView) findViewById(R.id.R41);
-        DisplayBoardBackground[4][1] = (TextView) findViewById(R.id.R041);
-        DisplayBoard[5][1] = (TextView) findViewById(R.id.R51);
-        DisplayBoardBackground[5][1] = (TextView) findViewById(R.id.R051);
-        DisplayBoard[6][1] = (TextView) findViewById(R.id.R61);
-        DisplayBoardBackground[6][1] = (TextView) findViewById(R.id.R061);
-        DisplayBoard[7][1] = (TextView) findViewById(R.id.R71);
-        DisplayBoardBackground[7][1] = (TextView) findViewById(R.id.R071);
+        displayBoard[0][1] = (TextView) findViewById(R.id.R01);
+        displayBoardBackground[0][1] = (TextView) findViewById(R.id.R001);
+        displayBoard[1][1] = (TextView) findViewById(R.id.R11);
+        displayBoardBackground[1][1] = (TextView) findViewById(R.id.R011);
+        displayBoard[2][1] = (TextView) findViewById(R.id.R21);
+        displayBoardBackground[2][1] = (TextView) findViewById(R.id.R021);
+        displayBoard[3][1] = (TextView) findViewById(R.id.R31);
+        displayBoardBackground[3][1] = (TextView) findViewById(R.id.R031);
+        displayBoard[4][1] = (TextView) findViewById(R.id.R41);
+        displayBoardBackground[4][1] = (TextView) findViewById(R.id.R041);
+        displayBoard[5][1] = (TextView) findViewById(R.id.R51);
+        displayBoardBackground[5][1] = (TextView) findViewById(R.id.R051);
+        displayBoard[6][1] = (TextView) findViewById(R.id.R61);
+        displayBoardBackground[6][1] = (TextView) findViewById(R.id.R061);
+        displayBoard[7][1] = (TextView) findViewById(R.id.R71);
+        displayBoardBackground[7][1] = (TextView) findViewById(R.id.R071);
 
-        DisplayBoard[0][2] = (TextView) findViewById(R.id.R02);
-        DisplayBoardBackground[0][2] = (TextView) findViewById(R.id.R002);
-        DisplayBoard[1][2] = (TextView) findViewById(R.id.R12);
-        DisplayBoardBackground[1][2] = (TextView) findViewById(R.id.R012);
-        DisplayBoard[2][2] = (TextView) findViewById(R.id.R22);
-        DisplayBoardBackground[2][2] = (TextView) findViewById(R.id.R022);
-        DisplayBoard[3][2] = (TextView) findViewById(R.id.R32);
-        DisplayBoardBackground[3][2] = (TextView) findViewById(R.id.R032);
-        DisplayBoard[4][2] = (TextView) findViewById(R.id.R42);
-        DisplayBoardBackground[4][2] = (TextView) findViewById(R.id.R042);
-        DisplayBoard[5][2] = (TextView) findViewById(R.id.R52);
-        DisplayBoardBackground[5][2] = (TextView) findViewById(R.id.R052);
-        DisplayBoard[6][2] = (TextView) findViewById(R.id.R62);
-        DisplayBoardBackground[6][2] = (TextView) findViewById(R.id.R062);
-        DisplayBoard[7][2] = (TextView) findViewById(R.id.R72);
-        DisplayBoardBackground[7][2] = (TextView) findViewById(R.id.R072);
+        displayBoard[0][2] = (TextView) findViewById(R.id.R02);
+        displayBoardBackground[0][2] = (TextView) findViewById(R.id.R002);
+        displayBoard[1][2] = (TextView) findViewById(R.id.R12);
+        displayBoardBackground[1][2] = (TextView) findViewById(R.id.R012);
+        displayBoard[2][2] = (TextView) findViewById(R.id.R22);
+        displayBoardBackground[2][2] = (TextView) findViewById(R.id.R022);
+        displayBoard[3][2] = (TextView) findViewById(R.id.R32);
+        displayBoardBackground[3][2] = (TextView) findViewById(R.id.R032);
+        displayBoard[4][2] = (TextView) findViewById(R.id.R42);
+        displayBoardBackground[4][2] = (TextView) findViewById(R.id.R042);
+        displayBoard[5][2] = (TextView) findViewById(R.id.R52);
+        displayBoardBackground[5][2] = (TextView) findViewById(R.id.R052);
+        displayBoard[6][2] = (TextView) findViewById(R.id.R62);
+        displayBoardBackground[6][2] = (TextView) findViewById(R.id.R062);
+        displayBoard[7][2] = (TextView) findViewById(R.id.R72);
+        displayBoardBackground[7][2] = (TextView) findViewById(R.id.R072);
 
-        DisplayBoard[0][3] = (TextView) findViewById(R.id.R03);
-        DisplayBoardBackground[0][3] = (TextView) findViewById(R.id.R003);
-        DisplayBoard[1][3] = (TextView) findViewById(R.id.R13);
-        DisplayBoardBackground[1][3] = (TextView) findViewById(R.id.R013);
-        DisplayBoard[2][3] = (TextView) findViewById(R.id.R23);
-        DisplayBoardBackground[2][3] = (TextView) findViewById(R.id.R023);
-        DisplayBoard[3][3] = (TextView) findViewById(R.id.R33);
-        DisplayBoardBackground[3][3] = (TextView) findViewById(R.id.R033);
-        DisplayBoard[4][3] = (TextView) findViewById(R.id.R43);
-        DisplayBoardBackground[4][3] = (TextView) findViewById(R.id.R043);
-        DisplayBoard[5][3] = (TextView) findViewById(R.id.R53);
-        DisplayBoardBackground[5][3] = (TextView) findViewById(R.id.R053);
-        DisplayBoard[6][3] = (TextView) findViewById(R.id.R63);
-        DisplayBoardBackground[6][3] = (TextView) findViewById(R.id.R063);
-        DisplayBoard[7][3] = (TextView) findViewById(R.id.R73);
-        DisplayBoardBackground[7][3] = (TextView) findViewById(R.id.R073);
+        displayBoard[0][3] = (TextView) findViewById(R.id.R03);
+        displayBoardBackground[0][3] = (TextView) findViewById(R.id.R003);
+        displayBoard[1][3] = (TextView) findViewById(R.id.R13);
+        displayBoardBackground[1][3] = (TextView) findViewById(R.id.R013);
+        displayBoard[2][3] = (TextView) findViewById(R.id.R23);
+        displayBoardBackground[2][3] = (TextView) findViewById(R.id.R023);
+        displayBoard[3][3] = (TextView) findViewById(R.id.R33);
+        displayBoardBackground[3][3] = (TextView) findViewById(R.id.R033);
+        displayBoard[4][3] = (TextView) findViewById(R.id.R43);
+        displayBoardBackground[4][3] = (TextView) findViewById(R.id.R043);
+        displayBoard[5][3] = (TextView) findViewById(R.id.R53);
+        displayBoardBackground[5][3] = (TextView) findViewById(R.id.R053);
+        displayBoard[6][3] = (TextView) findViewById(R.id.R63);
+        displayBoardBackground[6][3] = (TextView) findViewById(R.id.R063);
+        displayBoard[7][3] = (TextView) findViewById(R.id.R73);
+        displayBoardBackground[7][3] = (TextView) findViewById(R.id.R073);
 
-        DisplayBoard[0][4] = (TextView) findViewById(R.id.R04);
-        DisplayBoardBackground[0][4] = (TextView) findViewById(R.id.R004);
-        DisplayBoard[1][4] = (TextView) findViewById(R.id.R14);
-        DisplayBoardBackground[1][4] = (TextView) findViewById(R.id.R014);
-        DisplayBoard[2][4] = (TextView) findViewById(R.id.R24);
-        DisplayBoardBackground[2][4] = (TextView) findViewById(R.id.R024);
-        DisplayBoard[3][4] = (TextView) findViewById(R.id.R34);
-        DisplayBoardBackground[3][4] = (TextView) findViewById(R.id.R034);
-        DisplayBoard[4][4] = (TextView) findViewById(R.id.R44);
-        DisplayBoardBackground[4][4] = (TextView) findViewById(R.id.R044);
-        DisplayBoard[5][4] = (TextView) findViewById(R.id.R54);
-        DisplayBoardBackground[5][4] = (TextView) findViewById(R.id.R054);
-        DisplayBoard[6][4] = (TextView) findViewById(R.id.R64);
-        DisplayBoardBackground[6][4] = (TextView) findViewById(R.id.R064);
-        DisplayBoard[7][4] = (TextView) findViewById(R.id.R74);
-        DisplayBoardBackground[7][4] = (TextView) findViewById(R.id.R074);
+        displayBoard[0][4] = (TextView) findViewById(R.id.R04);
+        displayBoardBackground[0][4] = (TextView) findViewById(R.id.R004);
+        displayBoard[1][4] = (TextView) findViewById(R.id.R14);
+        displayBoardBackground[1][4] = (TextView) findViewById(R.id.R014);
+        displayBoard[2][4] = (TextView) findViewById(R.id.R24);
+        displayBoardBackground[2][4] = (TextView) findViewById(R.id.R024);
+        displayBoard[3][4] = (TextView) findViewById(R.id.R34);
+        displayBoardBackground[3][4] = (TextView) findViewById(R.id.R034);
+        displayBoard[4][4] = (TextView) findViewById(R.id.R44);
+        displayBoardBackground[4][4] = (TextView) findViewById(R.id.R044);
+        displayBoard[5][4] = (TextView) findViewById(R.id.R54);
+        displayBoardBackground[5][4] = (TextView) findViewById(R.id.R054);
+        displayBoard[6][4] = (TextView) findViewById(R.id.R64);
+        displayBoardBackground[6][4] = (TextView) findViewById(R.id.R064);
+        displayBoard[7][4] = (TextView) findViewById(R.id.R74);
+        displayBoardBackground[7][4] = (TextView) findViewById(R.id.R074);
 
-        DisplayBoard[0][5] = (TextView) findViewById(R.id.R05);
-        DisplayBoardBackground[0][5] = (TextView) findViewById(R.id.R005);
-        DisplayBoard[1][5] = (TextView) findViewById(R.id.R15);
-        DisplayBoardBackground[1][5] = (TextView) findViewById(R.id.R015);
-        DisplayBoard[2][5] = (TextView) findViewById(R.id.R25);
-        DisplayBoardBackground[2][5] = (TextView) findViewById(R.id.R025);
-        DisplayBoard[3][5] = (TextView) findViewById(R.id.R35);
-        DisplayBoardBackground[3][5] = (TextView) findViewById(R.id.R035);
-        DisplayBoard[4][5] = (TextView) findViewById(R.id.R45);
-        DisplayBoardBackground[4][5] = (TextView) findViewById(R.id.R045);
-        DisplayBoard[5][5] = (TextView) findViewById(R.id.R55);
-        DisplayBoardBackground[5][5] = (TextView) findViewById(R.id.R055);
-        DisplayBoard[6][5] = (TextView) findViewById(R.id.R65);
-        DisplayBoardBackground[6][5] = (TextView) findViewById(R.id.R065);
-        DisplayBoard[7][5] = (TextView) findViewById(R.id.R75);
-        DisplayBoardBackground[7][5] = (TextView) findViewById(R.id.R075);
+        displayBoard[0][5] = (TextView) findViewById(R.id.R05);
+        displayBoardBackground[0][5] = (TextView) findViewById(R.id.R005);
+        displayBoard[1][5] = (TextView) findViewById(R.id.R15);
+        displayBoardBackground[1][5] = (TextView) findViewById(R.id.R015);
+        displayBoard[2][5] = (TextView) findViewById(R.id.R25);
+        displayBoardBackground[2][5] = (TextView) findViewById(R.id.R025);
+        displayBoard[3][5] = (TextView) findViewById(R.id.R35);
+        displayBoardBackground[3][5] = (TextView) findViewById(R.id.R035);
+        displayBoard[4][5] = (TextView) findViewById(R.id.R45);
+        displayBoardBackground[4][5] = (TextView) findViewById(R.id.R045);
+        displayBoard[5][5] = (TextView) findViewById(R.id.R55);
+        displayBoardBackground[5][5] = (TextView) findViewById(R.id.R055);
+        displayBoard[6][5] = (TextView) findViewById(R.id.R65);
+        displayBoardBackground[6][5] = (TextView) findViewById(R.id.R065);
+        displayBoard[7][5] = (TextView) findViewById(R.id.R75);
+        displayBoardBackground[7][5] = (TextView) findViewById(R.id.R075);
 
-        DisplayBoard[0][6] = (TextView) findViewById(R.id.R06);
-        DisplayBoardBackground[0][6] = (TextView) findViewById(R.id.R006);
-        DisplayBoard[1][6] = (TextView) findViewById(R.id.R16);
-        DisplayBoardBackground[1][6] = (TextView) findViewById(R.id.R016);
-        DisplayBoard[2][6] = (TextView) findViewById(R.id.R26);
-        DisplayBoardBackground[2][6] = (TextView) findViewById(R.id.R026);
-        DisplayBoard[3][6] = (TextView) findViewById(R.id.R36);
-        DisplayBoardBackground[3][6] = (TextView) findViewById(R.id.R036);
-        DisplayBoard[4][6] = (TextView) findViewById(R.id.R46);
-        DisplayBoardBackground[4][6] = (TextView) findViewById(R.id.R046);
-        DisplayBoard[5][6] = (TextView) findViewById(R.id.R56);
-        DisplayBoardBackground[5][6] = (TextView) findViewById(R.id.R056);
-        DisplayBoard[6][6] = (TextView) findViewById(R.id.R66);
-        DisplayBoardBackground[6][6] = (TextView) findViewById(R.id.R066);
-        DisplayBoard[7][6] = (TextView) findViewById(R.id.R76);
-        DisplayBoardBackground[7][6] = (TextView) findViewById(R.id.R076);
+        displayBoard[0][6] = (TextView) findViewById(R.id.R06);
+        displayBoardBackground[0][6] = (TextView) findViewById(R.id.R006);
+        displayBoard[1][6] = (TextView) findViewById(R.id.R16);
+        displayBoardBackground[1][6] = (TextView) findViewById(R.id.R016);
+        displayBoard[2][6] = (TextView) findViewById(R.id.R26);
+        displayBoardBackground[2][6] = (TextView) findViewById(R.id.R026);
+        displayBoard[3][6] = (TextView) findViewById(R.id.R36);
+        displayBoardBackground[3][6] = (TextView) findViewById(R.id.R036);
+        displayBoard[4][6] = (TextView) findViewById(R.id.R46);
+        displayBoardBackground[4][6] = (TextView) findViewById(R.id.R046);
+        displayBoard[5][6] = (TextView) findViewById(R.id.R56);
+        displayBoardBackground[5][6] = (TextView) findViewById(R.id.R056);
+        displayBoard[6][6] = (TextView) findViewById(R.id.R66);
+        displayBoardBackground[6][6] = (TextView) findViewById(R.id.R066);
+        displayBoard[7][6] = (TextView) findViewById(R.id.R76);
+        displayBoardBackground[7][6] = (TextView) findViewById(R.id.R076);
 
-        DisplayBoard[0][7] = (TextView) findViewById(R.id.R07);
-        DisplayBoardBackground[0][7] = (TextView) findViewById(R.id.R007);
-        DisplayBoard[1][7] = (TextView) findViewById(R.id.R17);
-        DisplayBoardBackground[1][7] = (TextView) findViewById(R.id.R017);
-        DisplayBoard[2][7] = (TextView) findViewById(R.id.R27);
-        DisplayBoardBackground[2][7] = (TextView) findViewById(R.id.R027);
-        DisplayBoard[3][7] = (TextView) findViewById(R.id.R37);
-        DisplayBoardBackground[3][7] = (TextView) findViewById(R.id.R037);
-        DisplayBoard[4][7] = (TextView) findViewById(R.id.R47);
-        DisplayBoardBackground[4][7] = (TextView) findViewById(R.id.R047);
-        DisplayBoard[5][7] = (TextView) findViewById(R.id.R57);
-        DisplayBoardBackground[5][7] = (TextView) findViewById(R.id.R057);
-        DisplayBoard[6][7] = (TextView) findViewById(R.id.R67);
-        DisplayBoardBackground[6][7] = (TextView) findViewById(R.id.R067);
-        DisplayBoard[7][7] = (TextView) findViewById(R.id.R77);
-        DisplayBoardBackground[7][7] = (TextView) findViewById(R.id.R077);
+        displayBoard[0][7] = (TextView) findViewById(R.id.R07);
+        displayBoardBackground[0][7] = (TextView) findViewById(R.id.R007);
+        displayBoard[1][7] = (TextView) findViewById(R.id.R17);
+        displayBoardBackground[1][7] = (TextView) findViewById(R.id.R017);
+        displayBoard[2][7] = (TextView) findViewById(R.id.R27);
+        displayBoardBackground[2][7] = (TextView) findViewById(R.id.R027);
+        displayBoard[3][7] = (TextView) findViewById(R.id.R37);
+        displayBoardBackground[3][7] = (TextView) findViewById(R.id.R037);
+        displayBoard[4][7] = (TextView) findViewById(R.id.R47);
+        displayBoardBackground[4][7] = (TextView) findViewById(R.id.R047);
+        displayBoard[5][7] = (TextView) findViewById(R.id.R57);
+        displayBoardBackground[5][7] = (TextView) findViewById(R.id.R057);
+        displayBoard[6][7] = (TextView) findViewById(R.id.R67);
+        displayBoardBackground[6][7] = (TextView) findViewById(R.id.R067);
+        displayBoard[7][7] = (TextView) findViewById(R.id.R77);
+        displayBoardBackground[7][7] = (TextView) findViewById(R.id.R077);
 
         refreshBoard();
     }
@@ -202,43 +199,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void putPiece(int i, int j, Piece piece) {
+        i f ()
         switch (piece) {
             case WHITE_KING:
-                DisplayBoard[i][j].setBackgroundResource(R.drawable.wking);
+                displayBoard[i][j].setBackgroundResource(R.drawable.wking);
                 break;
             case BLACK_KING:
-                DisplayBoard[i][j].setBackgroundResource(R.drawable.bking);
+                displayBoard[i][j].setBackgroundResource(R.drawable.bking);
                 break;
 
             case WHITE_QUEEN:
-                DisplayBoard[i][j].setBackgroundResource(R.drawable.wqueen);
+                displayBoard[i][j].setBackgroundResource(R.drawable.wqueen);
                 break;
             case BLACK_QUEEN:
-                DisplayBoard[i][j].setBackgroundResource(R.drawable.bqueen);
+                displayBoard[i][j].setBackgroundResource(R.drawable.bqueen);
                 break;
             case WHITE_ROOK:
-                DisplayBoard[i][j].setBackgroundResource(R.drawable.wrook);
+                displayBoard[i][j].setBackgroundResource(R.drawable.wrook);
                 break;
             case BLACK_ROOK:
-                DisplayBoard[i][j].setBackgroundResource(R.drawable.brook);
+                displayBoard[i][j].setBackgroundResource(R.drawable.brook);
                 break;
             case WHITE_BISHOP:
-                DisplayBoard[i][j].setBackgroundResource(R.drawable.wbishop);
+                displayBoard[i][j].setBackgroundResource(R.drawable.wbishop);
                 break;
             case BLACK_BISHOP:
-                DisplayBoard[i][j].setBackgroundResource(R.drawable.bbishop);
+                displayBoard[i][j].setBackgroundResource(R.drawable.bbishop);
                 break;
             case WHITE_KNIGHT:
-                DisplayBoard[i][j].setBackgroundResource(R.drawable.wknight);
+                displayBoard[i][j].setBackgroundResource(R.drawable.wknight);
                 break;
             case BLACK_KNIGHT:
-                DisplayBoard[i][j].setBackgroundResource(R.drawable.bknight);
+                displayBoard[i][j].setBackgroundResource(R.drawable.bknight);
                 break;
             case WHITE_PAWN:
-                DisplayBoard[i][j].setBackgroundResource(R.drawable.wpawn);
+                displayBoard[i][j].setBackgroundResource(R.drawable.wpawn);
                 break;
             case BLACK_PAWN:
-                DisplayBoard[i][j].setBackgroundResource(R.drawable.bpawn);
+                displayBoard[i][j].setBackgroundResource(R.drawable.bpawn);
                 break;
 
             default:
@@ -502,17 +500,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     void setColorAtSelectedSquare(Square square) {
         if (board.getPiece(square).getPieceType().equals(PieceType.NONE)) {
-            DisplayBoardBackground[square.getFile().ordinal()][square.getRank().ordinal()].setBackgroundResource(R.color.colorPositionAvailable);
+            displayBoardBackground[square.getFile().ordinal()][square.getRank().ordinal()].setBackgroundResource(R.color.colorPositionAvailable);
         } else {
-            DisplayBoardBackground[square.getFile().ordinal()][square.getRank().ordinal()].setBackgroundResource(R.color.colorDanger);
+            displayBoardBackground[square.getFile().ordinal()][square.getRank().ordinal()].setBackgroundResource(R.color.colorDanger);
         }
     }
 
     private void resetColorAtLastPosition(Square square) {
         if ((square.getFile().ordinal() + square.getRank().ordinal()) % 2 == 0) {
-            DisplayBoardBackground[square.getFile().ordinal()][square.getRank().ordinal()].setBackgroundResource(R.color.colorBoardDark);
+            displayBoardBackground[square.getFile().ordinal()][square.getRank().ordinal()].setBackgroundResource(R.color.colorBoardDark);
         } else {
-            DisplayBoardBackground[square.getFile().ordinal()][square.getRank().ordinal()].setBackgroundResource(R.color.colorBoardLight);
+            displayBoardBackground[square.getFile().ordinal()][square.getRank().ordinal()].setBackgroundResource(R.color.colorBoardLight);
         }
     }
 

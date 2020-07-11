@@ -1015,6 +1015,7 @@
             android:layout_height="match_parent"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
+            android:background="#FFFFFF"
             android:onClick="piece"
             android:text="WHITE QUEEN"
             app:layout_constraintBottom_toBottomOf="parent"
