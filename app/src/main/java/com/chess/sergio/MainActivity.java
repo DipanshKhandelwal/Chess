@@ -1,7 +1,6 @@
 package com.chess.sergio;
 
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.MenuItem;
@@ -11,6 +10,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.github.bhlangonijr.chesslib.Board;
 import com.github.bhlangonijr.chesslib.File;
 import com.github.bhlangonijr.chesslib.Piece;
@@ -18,6 +19,12 @@ import com.github.bhlangonijr.chesslib.PieceType;
 import com.github.bhlangonijr.chesslib.Rank;
 import com.github.bhlangonijr.chesslib.Square;
 import com.github.bhlangonijr.chesslib.move.Move;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,View.OnLongClickListener {
 
@@ -31,6 +38,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView[][] displayBoard = new TextView[8][8];
     private TextView[][] displayBoardBackground = new TextView[8][8];
 
+    private DatabaseReference mDatabase;
+
     // OVERRIDDEN METHODS
 
     @Override
@@ -41,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         }
         setContentView(R.layout.activity_main);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         Button btn = (Button) findViewById(R.id.piece_button);
         registerForContextMenu(btn);
@@ -119,7 +130,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     } else{
                         board.doMove(move);
                         refreshBoard();
-                        Toast.makeText(this, board.getFen(), Toast.LENGTH_LONG).show();
+                        Query query = mDatabase.child(board.getFen()).limitToFirst(1);
+                        query.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.exists()) {
+                                    // dataSnapshot is the "issue" node with all children with id 0
+                                    for (DataSnapshot issue : dataSnapshot.getChildren()) {
+                                        Toast.makeText(MainActivity.this, issue.getValue().toString(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                    Toast.makeText(MainActivity.this, databaseError.getMessage().toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
                     }
                 }
                 anythingSelected = false;
@@ -164,7 +192,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (valuation.getText().toString().isEmpty()){
             Toast.makeText(this,"El contenido no puede ser nulo",Toast.LENGTH_SHORT).show();
         }else{
-            Toast.makeText(this,valuation.getText().toString(),Toast.LENGTH_SHORT).show();
+            mDatabase.child(board.getFen()).setValue(valuation.getText().toString());
         }
 
     }
