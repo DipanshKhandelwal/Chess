@@ -1,11 +1,9 @@
 package com.chess.sergio.board;
 
-import android.app.AlertDialog;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chess.sergio.R;
@@ -470,15 +468,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (AnythingSelected) {
             Move move = new Move(oldPosition, clickedPosition);
             if (board.isMoveLegal(move, true)) {
-                new AlertDialog.Builder(MainActivity.this).setTitle("Error").setMessage("Movimiento legal").create().show();
                 putPiece(oldPosition.getRank().ordinal(), oldPosition.getFile().ordinal(), Piece.NONE);
                 putPiece(clickedPosition.getRank().ordinal(), clickedPosition.getFile().ordinal(), board.getPiece(oldPosition));
                 board.doMove(move);
-
-            } else {
-                new AlertDialog.Builder(MainActivity.this).setTitle("Error").setMessage("Movimiento Ilegal").create().show();
             }
-
+        }else{
+            if (!board.getPiece(clickedPosition).equals(Piece.NONE)) {
+                AnythingSelected = true;
+            }
         }
     }
 
@@ -487,8 +484,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (board.getMoveCounter() > 0) {
             board.undoMove();
             refreshBoard();
-        } else {
-            new AlertDialog.Builder(MainActivity.this).setTitle("Error").setMessage("No hay movimientos anteriores").create().show();
         }
 
     }
@@ -499,8 +494,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.white_queen:
                 if (clickedPosition != null) {
                     board.setPiece(Piece.WHITE_KING, clickedPosition);
-                } else {
-                    new AlertDialog.Builder(MainActivity.this).setTitle("Error").setMessage("No has elegido posición").create().show();
                 }
                 break;
 

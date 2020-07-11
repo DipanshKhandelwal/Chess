@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "165272906034",
+    "firebase_url": "https://chesspositions-b02b7.firebaseio.com",
+    "project_id": "chesspositions-b02b7",
+    "storage_bucket": "chesspositions-b02b7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:165272906034:android:e084802cbe0243521e0f2b",
+        "android_client_info": {
+          "package_name": "com.chess.sergio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "165272906034-j1euecn148k5qh3ptebldrb32cjb4um2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxIPJbB24zkxZyVM3uEToMUkNkRc1vv5U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "165272906034-j1euecn148k5qh3ptebldrb32cjb4um2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
