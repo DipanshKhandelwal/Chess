@@ -142,8 +142,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                         Toast.makeText(MainActivity.this, issue.getValue().toString(), Toast.LENGTH_SHORT).show();
                                     }
                                 }else{
-                                    EditText valuation = findViewById(R.id.valuation_number);
-                                    valuation.setText(0);
                                     Toast.makeText(MainActivity.this, "No existía la posición", Toast.LENGTH_SHORT).show();
                                 }
                             }
