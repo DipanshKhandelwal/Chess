@@ -9,10 +9,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:configChanges="orientation|keyboardHidden">
-        <activity android:name="com.chess.sergio.board.MainActivity">
-        </activity>
 
-        <activity android:name="com.chess.sergio.FirstPage">
+        <activity android:name="com.chess.sergio.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
