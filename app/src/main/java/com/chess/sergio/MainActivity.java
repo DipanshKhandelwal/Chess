@@ -131,19 +131,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     } else{
                         board.doMove(move);
                         refreshBoard();
-                        Toast.makeText(this, FenUtils.removeJump(board.getFen()), Toast.LENGTH_LONG).show();
-                        Query query = mDatabase.child(FenUtils.removeJump(board.getFen())).limitToFirst(1);
+                        Query query = mDatabase.child(FenUtils.removeJump(board.getFen()));
                         query.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
+                                String valuation = "";
                                 if (dataSnapshot.exists()) {
-                                    // dataSnapshot is the "issue" node with all children with id 0
-                                    for (DataSnapshot issue : dataSnapshot.getChildren()) {
-                                        Toast.makeText(MainActivity.this, issue.getValue().toString(), Toast.LENGTH_SHORT).show();
-                                    }
+                                    valuation = dataSnapshot.getValue().toString();
+                                    Toast.makeText(MainActivity.this, "POSICION ENCONTRADA CON VALORACIÓN: "+valuation, Toast.LENGTH_SHORT).show();
                                 }else{
                                     Toast.makeText(MainActivity.this, "No existía la posición", Toast.LENGTH_SHORT).show();
                                 }
+                                EditText editText = findViewById(R.id.valuation_number);
+                                editText.setText(valuation);
                             }
 
                             @Override

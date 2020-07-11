@@ -27,6 +27,7 @@
         android:layout_marginTop="96dp"
         android:ems="10"
         android:text="0"
+        android:textColor="@color/colorDanger"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
