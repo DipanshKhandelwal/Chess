@@ -19,12 +19,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/wall" />
 
-    <TextView
-        android:id="@+id/info"
-        android:layout_width="300dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="52dp"
-        android:background="@color/colorDanger"
+    <EditText
+        android:id="@+id/position_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -1016,6 +1017,19 @@
     </GridLayout>
 
     <Button
+        android:id="@+id/piece_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
+        android:layout_marginRight="52dp"
+        android:onClick="delete"
+        android:text="SETUP"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/undo_button"
+        app:layout_constraintRight_toRightOf="parent" />
+
+
+    <Button
         android:id="@+id/undo_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -1025,6 +1039,8 @@
         android:text="UNDO"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
+
+
 
 
 </android.support.constraint.ConstraintLayout>
