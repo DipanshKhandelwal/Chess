@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.chess.sergio.utils.FenUtils;
 import com.github.bhlangonijr.chesslib.Board;
 import com.github.bhlangonijr.chesslib.File;
 import com.github.bhlangonijr.chesslib.Piece;
@@ -130,7 +131,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     } else{
                         board.doMove(move);
                         refreshBoard();
-                        Query query = mDatabase.child(board.getFen()).limitToFirst(1);
+                        Toast.makeText(this, FenUtils.removeJump(board.getFen()), Toast.LENGTH_LONG).show();
+                        Query query = mDatabase.child(FenUtils.removeJump(board.getFen())).limitToFirst(1);
                         query.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -139,6 +141,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     for (DataSnapshot issue : dataSnapshot.getChildren()) {
                                         Toast.makeText(MainActivity.this, issue.getValue().toString(), Toast.LENGTH_SHORT).show();
                                     }
+                                }else{
+                                    EditText valuation = findViewById(R.id.valuation_number);
+                                    valuation.setText(0);
+                                    Toast.makeText(MainActivity.this, "No existía la posición", Toast.LENGTH_SHORT).show();
                                 }
                             }
 
@@ -192,7 +198,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (valuation.getText().toString().isEmpty()){
             Toast.makeText(this,"El contenido no puede ser nulo",Toast.LENGTH_SHORT).show();
         }else{
-            mDatabase.child(board.getFen()).setValue(valuation.getText().toString());
+            mDatabase.child(FenUtils.removeJump(board.getFen())).setValue(valuation.getText().toString());
+
         }
 
     }
