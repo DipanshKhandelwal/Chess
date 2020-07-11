@@ -7,6 +7,7 @@ import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView[][] displayBoard = new TextView[8][8];
     private TextView[][] displayBoardBackground = new TextView[8][8];
 
+    // OVERRIDDEN METHODS
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +101,77 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             oldPosition= null;
             anythingSelected =false;
         }
+        getSelectedSquare(v);
+
+        if (selectedPosition !=null) {
+            if (oldPosition != null) {
+                resetColorAtLastPosition(oldPosition);
+            }
+            setColorAtSelectedSquare(selectedPosition);
+
+            if (anythingSelected) {
+                Move move = new Move(oldPosition, selectedPosition);
+                if (board.getPiece(oldPosition)!=null) {
+                    if (!board.getPiece(oldPosition).getPieceSide().equals(board.getSideToMove())){
+                        Toast.makeText(this, "No es tu turno", Toast.LENGTH_SHORT).show();
+                    } else if (!board.isMoveLegal(move, true)) {
+                        Toast.makeText(this, "El movimiento intentado es ilegal", Toast.LENGTH_SHORT).show();
+                    } else{
+                        board.doMove(move);
+                        refreshBoard();
+                        Toast.makeText(this, board.getFen(), Toast.LENGTH_LONG).show();
+                    }
+                }
+                anythingSelected = false;
+            } else {
+                if (board.getPiece(selectedPosition)!=null && board.getSideToMove().equals(board.getPiece(selectedPosition).getPieceSide())) {
+                    anythingSelected = true;
+                }
+            }
+        }
+    }
+
+    @Override
+    public boolean onLongClick(View view) {
+        return false;
+    }
+
+    // PUBLIC METHODS
+
+    public void delete(View v) {
+
+        if (selectedPosition!=null){
+            anythingSelected=false;
+            board.unsetPiece(board.getPiece(selectedPosition),selectedPosition);
+            refreshBoard();
+        }else{
+            Toast.makeText(this, "No ha seleccionado ninguna pieza", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    public void undo(View v) {
+
+        if (!board.getBackup().isEmpty()) {
+            board.undoMove();
+            refreshBoard();
+        }
+
+    }
+
+    public void save(View v) {
+        EditText valuation = (EditText)findViewById(R.id.valuation_number);
+        if (valuation.getText().toString().isEmpty()){
+            Toast.makeText(this,"El contenido no puede ser nulo",Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(this,valuation.getText().toString(),Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    // PRIVATE METHODS
+
+    private void getSelectedSquare(View v) {
         switch (v.getId()) {
             case R.id.R00:
             case R.id.R000:
@@ -364,52 +437,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 selectedPosition = getSquare(7, 0);
                 break;
         }
-
-        if (selectedPosition !=null) {
-            if (oldPosition != null) {
-                resetColorAtLastPosition(oldPosition);
-            }
-            setColorAtSelectedSquare(selectedPosition);
-
-            if (anythingSelected) {
-                Move move = new Move(oldPosition, selectedPosition);
-                if (board.getPiece(oldPosition)!=null && board.getPiece(oldPosition).getPieceSide().equals(board.getSideToMove()) && board.isMoveLegal(move, true)) {
-                    board.doMove(move);
-                    refreshBoard();
-                    anythingSelected=false;
-                }
-            } else {
-                if (board.getPiece(selectedPosition)!=null && board.getSideToMove().equals(board.getPiece(selectedPosition).getPieceSide())) {
-                    anythingSelected = true;
-                }
-            }
-        }
     }
 
-    @Override
-    public boolean onLongClick(View view) {
-        return false;
-    }
-
-    public void delete(View v) {
-
-        if (selectedPosition!=null){
-            anythingSelected=false;
-            board.unsetPiece(board.getPiece(selectedPosition),selectedPosition);
-            refreshBoard();
-        }else{
-            Toast.makeText(this, "No ha seleccionado ninguna pieza", Toast.LENGTH_SHORT).show();
-        }
-
-    }
-
-    public void undo(View v) {
-
-        if (!board.getBackup().isEmpty()) {
-            board.undoMove();
-            refreshBoard();
-        }
-
+    private Square getSquare(int f, int r) {
+        Rank[] ranks = {Rank.RANK_1, Rank.RANK_2, Rank.RANK_3, Rank.RANK_4, Rank.RANK_5, Rank.RANK_6, Rank.RANK_7, Rank.RANK_8};
+        File[] files = {File.FILE_A, File.FILE_B, File.FILE_C, File.FILE_D, File.FILE_E, File.FILE_F, File.FILE_G, File.FILE_H};
+        Rank rank = ranks[r];
+        File file = files[f];
+        return Square.encode(rank, file);
     }
 
     private void putPiece(int i, int j, Piece piece) {
@@ -457,14 +492,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             default:
                 displayBoard[i][j].setBackgroundResource(0);
         }
-    }
-
-    private Square getSquare(int f, int r) {
-        Rank[] ranks = {Rank.RANK_1, Rank.RANK_2, Rank.RANK_3, Rank.RANK_4, Rank.RANK_5, Rank.RANK_6, Rank.RANK_7, Rank.RANK_8};
-        File[] files = {File.FILE_A, File.FILE_B, File.FILE_C, File.FILE_D, File.FILE_E, File.FILE_F, File.FILE_G, File.FILE_H};
-        Rank rank = ranks[r];
-        File file = files[f];
-        return Square.encode(rank, file);
     }
 
     private void refreshBoard() {
